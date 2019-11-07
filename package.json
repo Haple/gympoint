@@ -1,5 +1,5 @@
 {
-  "name": "node-template",
+  "name": "gympoint",
   "version": "0.0.1",
   "main": "./src/server.js",
   "license": "MIT",

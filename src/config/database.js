@@ -3,7 +3,7 @@ module.exports = {
   host: 'localhost',
   username: 'postgres',
   password: 'UmaSenhaMuitoBoa',
-  database: 'node-template',
+  database: 'gympoint',
   define: {
     timestamp: true,
     underscored: true,
