@@ -133,6 +133,21 @@ Open `./src/config/database.js` then edit it with your database settings. You wi
 - A password;
 - A database;
 
+## Root config files
+
+  ### .editorconfig
+    Even whether your team of devs work with other code editors than not VS Code they this file preserve some code style configs.
+  ### .eslintrc.js
+    Used together with ESLint VS Code extension. ESLint statically analyzes your Javascript code to quickly find problems, which can be automatically fixed in most cases. Also used to force a code style in a dev team.
+  ### .gitignore
+    The files and folders listed in this file are ignored by git. Folders like *node_modules* and environment files are good exemple of things that should not be in version control.
+  ### .prettierrc
+    Used to custom the Prettier code style configs.
+  ### .sequelizerc
+    Used to configure common folders used by Sequelize (database orm).
+  ### nodemon.json
+    Used to register the Sucrase (ES5 transpiler) dependency to the lifecycle of Nodemon.
+
 ## Running
 
     $ yarn dev
