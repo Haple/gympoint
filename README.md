@@ -37,7 +37,7 @@
 
 This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketseat.com.br/bootcamp) with the following technologies:
 
--  [VS Code][vc] with [ESLint][vceslint]
+-  [VS Code](https://code.visualstudio.com/) with [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 -  [Node.js](https://nodejs.org)
 -  [Express](https://expressjs.com/)
 -  [nodemon](https://nodemon.io/)
