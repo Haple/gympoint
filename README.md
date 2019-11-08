@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-  Backend for a gym management app. Until now its main objective is be a project to study Javascript.
+  Backend for a gym management app. Until now its main objective is to be a project to study Javascript.
 </h4>
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/haple/gympoint-backend.svg">
