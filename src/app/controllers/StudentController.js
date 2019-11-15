@@ -39,20 +39,13 @@ class StudentController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string()
-        .email()
-        .required(),
+      name: Yup.string(),
+      email: Yup.string().email(),
       age: Yup.number()
         .integer()
-        .positive()
-        .required(),
-      weigth: Yup.number()
-        .positive()
-        .required(),
-      height: Yup.number()
-        .positive()
-        .required(),
+        .positive(),
+      weigth: Yup.number().positive(),
+      height: Yup.number().positive(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -63,7 +56,7 @@ class StudentController {
 
     const { email } = req.body;
     const student = await Student.findByPk(req.params.id);
-    if (email !== student.email) {
+    if (email && email !== student.email) {
       const studentExists = await Student.findOne({
         where: { email },
       });
