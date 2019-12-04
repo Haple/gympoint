@@ -56,11 +56,11 @@ This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketse
 -  [Yup](https://www.npmjs.com/package/yup)
 -  [date-fns](https://date-fns.org/)
 -  [DotEnv](https://www.npmjs.com/package/dotenv)
+-  [Bee Queue](https://www.npmjs.com/package/bcrypt)
+-  [Nodemailer](https://nodemailer.com/about/)
+-  [Redis](https://redis.io/)
 <!-- -  [Youch](https://www.npmjs.com/package/youch) -->
 <!-- -  [Sentry](https://sentry.io/) -->
-<!-- -  [Bee Queue](https://www.npmjs.com/package/bcrypt) -->
-<!-- -  [Nodemailer](https://nodemailer.com/about/) -->
-<!-- -  [Redis](https://redis.io/) -->
 <!-- -  [MongoDB](https://www.mongodb.com/) -->
 <!-- -  [Mongoose](https://mongoosejs.com/) -->
 
@@ -127,15 +127,45 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
     ```
 
+  - ### Install Redis
+    Using docker, run the following command to install Redis:
+    ```
+    $ docker run --name redis-gympoint -p 6379:6379 -d -t redis:alpine
+    ```
+
 
 ## Configure
+Copy the file `.env.exemplo` and name it only `.env`. Fill this file with
+your own settings:
 
-Open `./src/config/database.js` then edit it with your database settings. You will need:
+```
 
-- A host;
-- A username;
-- A password;
-- A database;
+# Auth
+APP_SECRET=
+
+# Database
+DB_HOST=
+DB_USER=
+DB_PASS=
+DB_NAME=
+
+# Mongo
+MONGO_URL=
+
+# Redis
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+
+# Mail
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USER=
+MAIL_PASS=
+
+# Sentry
+SENTRY_DSN=
+
+```
 
 ## Running
 
