@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      canceled_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       price: {
         type: Sequelize.DECIMAL,
         allowNull: false,
