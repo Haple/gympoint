@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
-import { subDays, startOfDay } from 'date-fns';
+import { startOfDay, startOfWeek, endOfWeek } from 'date-fns';
 import Checkin from '../schemas/Checkin';
 import Enrollment from '../models/Enrollment';
 
@@ -74,12 +74,27 @@ class CheckinController {
       return res.status(400).json({ error: 'Student is not enrolled' });
 
     /**
-     * Check if user already has 5 checkins in the past 6 days
+     * Check if user already checked in today
+     */
+    const alreadyCheckedInToday =
+      (await Checkin.count({
+        user: id,
+        createdAt: {
+          $gte: startOfDay(new Date()),
+        },
+      })) >= 1;
+
+    if (alreadyCheckedInToday)
+      return res.status(400).json({ error: 'Already checked in today' });
+
+    /**
+     * Check if user already has 5 checkins in this week
      */
     const checkins = await Checkin.count({
       user: id,
       createdAt: {
-        $gte: subDays(startOfDay(new Date()), 6),
+        $gte: startOfWeek(new Date()),
+        $lte: endOfWeek(new Date()),
       },
     });
     if (checkins >= 5)
