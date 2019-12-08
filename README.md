@@ -117,14 +117,20 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ cd gympoint-backend
     $ yarn install
 
-  - ### Install database
-    Using docker, run the following command to install the database:
+  - ### Install PostgreSQL
+    Using docker, run the following command to install PostgreSQL:
     ```
-    sudo docker run -e 'POSTGRES_PASSWORD=UmaSenhaMuitoBoa' \
+    $ docker run -e 'POSTGRES_PASSWORD=UmaSenhaMuitoBoa' \
     -e 'POSTGRES_DB=gympoint'\
     -p 5432:5432 --name gympoint-db \
     -d postgres
 
+    ```
+
+  - ### Install MongoDB
+    Using docker, run the following command to install MongoDB:
+    ```
+    $ docker run --name mongo-gympoint -p 27017:27017 -d -t mongo
     ```
 
   - ### Install Redis
@@ -150,7 +156,7 @@ DB_PASS=
 DB_NAME=
 
 # Mongo
-MONGO_URL=
+MONGO_URL=mongodb://localhost:27017/gympoint
 
 # Redis
 REDIS_HOST=127.0.0.1
