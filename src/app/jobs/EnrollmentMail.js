@@ -4,7 +4,7 @@ import Mail from '../../lib/Mail';
 
 class EnrollmentMail {
   get key() {
-    return 'WelcomeMail';
+    return 'Enrollment';
   }
 
   async handle({ data }) {
