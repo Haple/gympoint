@@ -59,10 +59,10 @@ This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketse
 -  [Bee Queue](https://www.npmjs.com/package/bcrypt)
 -  [Nodemailer](https://nodemailer.com/about/)
 -  [Redis](https://redis.io/)
-<!-- -  [Youch](https://www.npmjs.com/package/youch) -->
-<!-- -  [Sentry](https://sentry.io/) -->
-<!-- -  [MongoDB](https://www.mongodb.com/) -->
-<!-- -  [Mongoose](https://mongoosejs.com/) -->
+-  [Youch](https://www.npmjs.com/package/youch)
+-  [Sentry](https://sentry.io/)
+-  [MongoDB](https://www.mongodb.com/)
+-  [Mongoose](https://mongoosejs.com/)
 
 ---
 ## Requirements
