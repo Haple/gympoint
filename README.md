@@ -144,35 +144,6 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 Copy the file `.env.exemplo` and name it only `.env`. Fill this file with
 your own settings:
 
-```
-
-# Auth
-APP_SECRET=
-
-# Database
-DB_HOST=
-DB_USER=
-DB_PASS=
-DB_NAME=
-
-# Mongo
-MONGO_URL=mongodb://localhost:27017/gympoint
-
-# Redis
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-
-# Mail
-MAIL_HOST=
-MAIL_PORT=
-MAIL_USER=
-MAIL_PASS=
-
-# Sentry
-SENTRY_DSN=
-
-```
-
 ## Running
 
     $ yarn dev

@@ -8,6 +8,14 @@ import Plan from '../app/models/Plan';
 import Enrollment from '../app/models/Enrollment';
 import HelpOrder from '../app/models/HelpOrder';
 
+const {
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_HOSTNAME,
+  MONGO_PORT,
+  MONGO_DB,
+} = process.env;
+
 const models = [User, Student, Plan, Enrollment, HelpOrder];
 
 class Database {
@@ -24,7 +32,11 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
+    const mongoUrl =
+      MONGO_USERNAME && MONGO_PASSWORD
+        ? `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`
+        : `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;
+    this.mongoConnection = mongoose.connect(mongoUrl, {
       useNewUrlParser: true,
       useFindAndModify: true,
     });
