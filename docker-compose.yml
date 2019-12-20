@@ -1,79 +1,94 @@
 version: '3'
 
 services:
-  gympoint-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - gympoint-redis
-      - gympoint-mongo
-      - gympoint-postgres
-    image: gympoint-backend
-    container_name: gympoint-backend
-    restart: unless-stopped
+
+  postgres:
+    image: postgres:11.2-alpine
+    ports:
+      - "5432:5432"
     env_file: .env
     environment:
-      - APP_URL=$APP_URL
-      - NODE_ENV=$NODE_ENV
-      - PORT=$PORT
-      - APP_SECRET=$APP_SECRET
-      - DB_HOST=$DB_HOST
-      - DB_USER=$DB_USER
-      - DB_PASS=$DB_PASS
-      - DB_NAME=$DB_NAME
-      - MONGO_USERNAME=$MONGO_USERNAME
-      - MONGO_PASSWORD=$MONGO_PASSWORD
-      - MONGO_HOSTNAME=$MONGO_HOSTNAME
-      - MONGO_PORT=$MONGO_PORT
-      - MONGO_DB=$MONGO_DB
-      - REDIS_HOST=$REDIS_HOST
-      - REDIS_PORT=$REDIS_PORT
-      - MAIL_HOST=$MAIL_HOST
-      - MAIL_PORT=$MAIL_PORT
-      - MAIL_USER=$MAIL_USER
-      - MAIL_PASS=$MAIL_PASS
-      - SENTRY_DSN=$SENTRY_DSN
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASS
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data
 
+  redis:
+    image: redis
     ports:
-      - "3000:3000"
+      - "6379:6379"
+
+  mongo:
+    image: mongo:4.1.8-xenial
+    ports:
+      - "27017:27017"
+
+    # volumes:
+    #   - mongodata:/data/db
+
+  migrate:
+    build: .
+    entrypoint: node_modules/.bin/sequelize db:migrate --config src/config/database.js --migrations-path src/database/migrations/
     volumes:
       - .:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
-    networks:
-      - gympoint-network
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres
 
-  gympoint-redis:
-    image: redis
-    container_name: gympoint-redis
-    networks:
-      - gympoint-network
-
-  gympoint-postgres:
-    image: postgres:11.2-alpine
-    container_name: gympoint-postgres
-    env_file: .env
-    environment:
-      - POSTGRES_DB=$DB_PASS
-      - POSTGRES_PASSWORD=$DB_NAME
-
-  gympoint-mongo:
-    image: mongo:4.1.8-xenial
-    container_name: gympoint-mongo
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+  seed:
+    build: .
+    entrypoint: node_modules/.bin/sequelize db:seed:all --config src/config/database.js --migrations-path src/database/migrations/
     volumes:
-      - dbdata:/data/db
-    networks:
-      - gympoint-network
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - migrate
+      - postgres
 
-networks:
-  gympoint-network:
-    driver: bridge
+  gympoint-backend:
+    build: .
+    # entrypoint: node dist/server.js
+    entrypoint: node_modules/.bin/nodemon src/server.js
+    ports:
+      - "3000:3000"
+    env_file: .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres
+      - redis
+      - mongo
+    links:
+      - postgres
+      - redis
+      - mongo
+    # image: gympoint-backend
+    # container_name: gympoint-backend
+    # restart: unless-stopped
 
-volumes:
-  dbdata:
-  node_modules:
+    # networks:
+    #   - gympoint-network
+    # command: npm run docker:dev
+
+  gympoint-queue:
+    build: .
+    # entrypoint: node dist/queue.js
+    entrypoint: node_modules/.bin/nodemon src/queue.js
+    env_file: .env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - redis
+    links:
+      - redis
+# networks:
+#   gympoint-network:
+#     driver: bridge
+
+# volumes:
+#   pgdata:
+#   mongodata:
+#   node_modules:

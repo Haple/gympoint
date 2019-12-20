@@ -116,29 +116,8 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ git clone https://github.com/haple/gympoint-backend
     $ cd gympoint-backend
     $ yarn install
-
-  - ### Install PostgreSQL
-    Using docker, run the following command to install PostgreSQL:
-    ```
-    $ docker run -e 'POSTGRES_PASSWORD=UmaSenhaMuitoBoa' \
-    -e 'POSTGRES_DB=gympoint'\
-    -p 5432:5432 --name gympoint-db \
-    -d postgres
-
-    ```
-
-  - ### Install MongoDB
-    Using docker, run the following command to install MongoDB:
-    ```
-    $ docker run --name mongo-gympoint -p 27017:27017 -d -t mongo
-    ```
-
-  - ### Install Redis
-    Using docker, run the following command to install Redis:
-    ```
-    $ docker run --name redis-gympoint -p 6379:6379 -d -t redis:alpine
-    ```
-
+    $ docker-compose build gympoint-backend
+    $ make setup-all
 
 ## Configure
 Copy the file `.env.exemplo` and name it only `.env`. Fill this file with
@@ -146,7 +125,7 @@ your own settings:
 
 ## Running
 
-    $ yarn dev
+    $ make gympoint-backend
 
 ## Debug
 First run the following:
