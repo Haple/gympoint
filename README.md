@@ -27,7 +27,7 @@
 <p align="center">
   <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#requirements">Requirements</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#install">Install</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#first-time-install">First time install</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#configure">Configure</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#running">Running</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#debug">Debug</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -111,7 +111,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ---
 
-## Install
+## First time install
 
     $ git clone https://github.com/haple/gympoint-backend
     $ cd gympoint-backend
@@ -140,38 +140,43 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     ```
 
 
-## Configure
-Copy the file `.env.exemplo` and name it only `.env`. Fill this file with
-your own settings:
+  - ### Configure
+    Copy the file `.env.exemplo` and name it only `.env`. Fill this file with
+    your own settings:
 
-```
+    ```
 
-# Auth
-APP_SECRET=
+    # Auth
+    APP_SECRET=
 
-# Database
-DB_HOST=
-DB_USER=
-DB_PASS=
-DB_NAME=
+    # Database
+    DB_HOST=
+    DB_USER=
+    DB_PASS=
+    DB_NAME=
 
-# Mongo
-MONGO_URL=mongodb://localhost:27017/gympoint
+    # Mongo
+    MONGO_URL=mongodb://localhost:27017/gympoint
 
-# Redis
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
+    # Redis
+    REDIS_HOST=127.0.0.1
+    REDIS_PORT=6379
 
-# Mail
-MAIL_HOST=
-MAIL_PORT=
-MAIL_USER=
-MAIL_PASS=
+    # Mail
+    MAIL_HOST=
+    MAIL_PORT=
+    MAIL_USER=
+    MAIL_PASS=
 
-# Sentry
-SENTRY_DSN=
+    # Sentry
+    SENTRY_DSN=
 
-```
+    ```
+
+  - ### Setup database
+    ```
+    $ yarn setup-db
+    ```
 
 ## Running
 
